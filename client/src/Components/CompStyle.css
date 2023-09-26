@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display&display=swap');
+
+/* ================HEADER==================== */
+.defaultLayout{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-y: hidden;
+}
+.header{
+    background-color: rgb(14, 71, 121);
+    display: flex;
+    justify-content: center;
+    height: 11vw;
+    /* box-sizing: border-box; */
+}
+.header .inner{
+    box-sizing: border-box;
+    background-color: white;
+    width: 85vw;
+    height: 8vw;
+    border-radius: 0px 0px 1.2vw 1.2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header .inner img{
+    width: 15vw;
+    height: 8vw;
+    margin-left: 2vw;
+}
+.header .inner ul {
+    display: flex;
+    list-style-type: none;
+    font-weight: bold;
+    justify-self: flex-end;
+    margin-top: 1.5vw;
+    margin-right: 4.5vw;
+}
+.header .inner ul li {
+    cursor: pointer;
+}
+.header .inner ul li:not(:first-of-type){
+    margin-left: 1.5vw;
+}
+.header .inner .buttonGroup{
+    display: flex;
+}
+
+.header .inner button{
+    margin: 1vw;
+    padding: 1.2vw 0vw;
+    width: 10vw;
+    border: none;
+    border-radius: 5vw;
+}
+
+.header .inner .buttonGroup :nth-child(1){
+    background-color: rgb(221, 221, 226);
+}
+.header .inner .buttonGroup :nth-child(2){
+    background-color: rgb(14, 71, 121);
+    color: white;
+}
+.becomeProviderBtn{
+    padding: 1.2vw 12vw;
+    background-color: #323E48;
+}
+.content{
+    min-height: 90vh;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.content > * {
+    max-width: 98.75;
+}
+.portalLayout{
+    height: 85vh;
+    width: 100vw;
+}
+/* =================LOGGED IN MENU=============== */
+.LoggedInLayout{
+    width: 100%;
+    min-height: 30vh;
+    box-sizing: border-box;
+    max-width: 100vw;
+    overflow-y: hidden;
+    padding: 0;
+    margin: 0;
+}
+.LoggedIn-menu{
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    height: 7vw;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.LoggedIn-menu h3{
+    background-color:cornflowerblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: .5vw 2vw;
+}
+.LoggedIn-menu ul{
+    display: flex;
+    margin-right: 5vw;
+    list-style: none;
+    font-size: 20px;
+}
+.LoggedIn-menu ul li{
+    margin-left: 1vw;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.Credential-Dropdown, .getInfo-dropdown{
+    position: relative;
+    display: inline-block;
+    background-color: aliceblue;
+}
+.getInfo-dropdown:hover .getInfo-dropdown-content{
+    display: block;
+    
+}
+
+.Credential-Dropdown:hover .Credential-Dropdown-content{
+    display: block;
+}
+.Credential-Dropdown-content, .getInfo-dropdown-content{
+    position: absolute;
+    margin-left: -5vw;
+    display: none;
+    background-color: aliceblue;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  
+}
+.Credential-Dropdown-content ul, .getInfo-dropdown-content ul{
+    margin-bottom: 2vw;
+    min-width: 17vw;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.Credential-Dropdown-content ul li, .getInfo-dropdown-content ul li{
+    margin: 2vw 0 0 2vw;
+    min-width: 22vw;
+
+}
+.Credential-Dropdown-content li:hover, .getInfo-dropdown-content li:hover{
+    background-color: #ddd;
+}
+.switchButtons{
+    margin-right: 1vw;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.switchButtons button{
+    padding: .5vw 1.5vw;
+    border: 1px solid rgb(14, 71, 121);
+}
+.activeButton{
+    color: white;
+    background-color: rgb(14, 71, 121);
+
+}
+/* ==============REGISTERATION FORM================== */
+.registeration-form-page{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .registeration-form-page .inner-left{
+    color: white;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .registeration-form-page .inner-left p, h2{
+    width: 27vw;
+  }
+  .registeration-form-page .inner-left button{
+    width: 15vw;
+    padding: .5vw 2vw;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    margin-top: 3vw;
+  }
+  .registeration-form-page .inner-right{
+    width: 67vw;
+    margin-right: 3vw;
+    float: right;
+    height: 90vh;
+    background-color: white;
+    border-radius: 12vw 0vw 0vw 12vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .registeration-form-page .inner-right form input{
+    border-radius: 5px;
+    border: 1px solid #b0b2b5;
+    margin-top: 10px; 
+    padding: .5vw 2vw;
+  }
+  .registeration-form-page .inner-right button{
+    width: 15vw;
+    padding: .5vw 2vw;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    margin-top: 3vw;
+    background-color: rgba(9,9,121,1);
+    color: white;
+  }
+    
+
+/* ==================MENU LAYOUT================== */
+.menuLayout div ul{
+    align-items: start;
+    margin: 0;
+    padding: 0;
+}
+.menuLayout div ul li{
+    list-style: none;
+    color: white;
+    background-color: rgb(19, 123, 123);
+    margin-top: 2vw;
+    padding: 1vw 1vw;
+    cursor: pointer;
+    /* float: ; */
+}
+.heading{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.heading h2{
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 30vw;
+    text-align: center;
+    border-radius: 0px 0px 10px 10px;
+    padding: 0.8vw;
+    color: white;
+}
+
+/* =================FOOTER================= */
+.footerLayout{
+    background-color: #323E48;
+    height: 12vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 5vw;
+}
+.footerLayout .icons{
+    margin-top: 3vw;
+}
+.footerLayout .icons > * {
+    color: white;
+    font-size: 25px;
+    margin-right: 2vw;
+}
+.footerLayout .footerMenu{
+    list-style: none;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    margin-top: 1vw;
+}
+.footerLayout .footerMenu li{
+    margin-right: 2vw;
+}

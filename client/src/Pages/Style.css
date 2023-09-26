@@ -1,0 +1,832 @@
+/* =================MAIN HOME PAGE=============== */
+.HomePage {
+    box-sizing: border-box;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.HomePage > * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    width: 100%;
+
+}
+.HomePage-inner {
+    background-color: #064976;
+    height: 100vh;
+    width: 85vw;
+    margin-top: 2.8vw;
+    border-radius: 2vw;
+    display: flex;
+}
+
+.HomePage-inner-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+}
+
+.HomePage-inner-left p {
+    margin-top: 2vw;
+}
+
+.HomePage-inner-left>* {
+    width: 40vw;
+}
+
+.HomePage-inner-left>button {
+    border: none;
+    background-color: #1992E0;
+    padding: .5vw 2vw;
+    color: white;
+    margin-top: 3vw;
+    border-radius: 30px;
+    width: 20vw;
+}
+
+.HomePage-inner-right {
+    width: 50%;
+}
+
+.HomePage-inner-right img {
+    width: 42.5vw;
+    height: 100vh;
+    border-radius: 0 2vw 2vw 0;
+}
+
+.self-sovereign {
+    box-sizing: border-box;
+    overflow-y: hidden;
+    background-color: #e2e7eb;
+    width: 98.75vw;
+    /* width: 100vw; */
+    margin-top: 2.8vw;
+    display: flex;
+
+}
+
+.self-sovereign-left {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.self-sovereign-left img {
+    width: 40vw;
+    height: 40vw;
+}
+
+.self-sovereign-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+}
+
+.self-sovereign-right * {
+    width: 40vw;
+}
+
+.verifiable-credentials {
+    height: 70vh;
+    width: 98.75vw;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.verifiable-credentials-left {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.verifiable-credentials-left>* {
+    width: 45vw;
+}
+
+.verifiable-credentials-right {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.verifiable-credentials-right img {
+    width: 35vw;
+    height: 25vw;
+    border-radius: 20px;
+}
+
+.verification {
+    width: 98.75vw;
+    overflow-y: hidden;
+    box-sizing: border-box;
+    height: 90vh;
+    background-color: #e2e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4vw;
+}
+
+.verification-left {
+    width: 45vw;
+}
+
+.verification-left>* {
+    width: 45vw;
+}
+
+.verification-right {
+    width: 40vw;
+}
+
+.verification-right img {
+    width: 40vw;
+    height: 30vw;
+    border-radius: 10px;
+}
+
+.did {
+    width: 98.75vw;
+    overflow-y: hidden;
+    box-sizing: border-box;
+    display: flex;
+    margin-top: 3vw;
+    height: 70vh;
+}
+
+.did-left {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.did-left img {
+    width: 40vw;
+    height: 25vw;
+    border-radius: 10px;
+}
+
+.did-right {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.did-right>* {
+    width: 40vw;
+}
+
+/* =================REGISTER PAGE==================== */
+.gotDid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 70vw;
+    height: 20vw;
+    background-color: #1992E0;
+    position: absolute;
+    top: 33%;
+    left: 15%;
+}
+
+.gotDid button {
+    border: 2px solid white;
+    background-color: #1992E0;
+    padding: .5vw 2vw;
+    color: white;
+    margin-top: 10px;
+}
+
+.RegisteredModal {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.RegisteredModal-inner {
+    width: 60vw;
+    background-color: #064976;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    border-radius: 0vw 2vw 0vw 2vw;
+}
+
+.registeredModal-Desc {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.RegisteredModal .btnGroup {
+    margin-bottom: 3vw;
+    margin-top: 1vw;
+    width: 100%;
+    text-align: right;
+}
+
+.RegisteredModal .btnGroup button {
+    border: 1px solid white;
+    border-radius: 7px 0 7px 0;
+    background-color: #064976;
+    color: white;
+    padding: .7vw 4vw;
+    min-width: 10vw;
+    margin-right: 2vw;
+}
+
+/* ===========LOGIN PAGE========= */
+.Login {
+    height: 100%;
+}
+
+.Login form input,
+.Register form input {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: 25vw;
+    margin-top: 10px;
+}
+
+/* =================LOGGED IN DASHBOARD=============== */
+.loggedInHomePage {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loggedInHomePage h2,
+.createNewCredential h2,
+.userProfile h2,
+.Credentials h2,
+.ProviderProfile h2,
+.certificate h2,
+.IssuedCredentials h2,
+.CredentialAccess h2 {
+    background-color: #064976;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+    color: white;
+    height: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loggedInHomePage .boxesGroup {
+    margin-top: 5vw;
+    display: flex;
+}
+
+.boxesGroup div {
+    border: 1px solid rgb(219, 212, 212);
+    padding: 2vw;
+    cursor: pointer;
+}
+
+.loggedInHomePage .btnGroup {
+    /* margin-top: 5vw; */
+    width: 70%;
+    text-align: end;
+}
+
+.loggedInHomePage .btnGroup button {
+    background-color: #0f8bde;
+    border: 1px solid gray;
+    /* border-radius: 5px; */
+    color: white;
+    padding: .5vw 2vw;
+    margin: 3vw 2.5vw 0 0vw;
+}
+
+/* =================LOGGED IN CREATE NEW CREDENTIAL=============== */
+.createNewCredential {
+    box-sizing: border-box;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.createNewCredential form {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    width: 40vw;
+    height: 25vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 5vw;
+}
+
+.createNewCredential button {
+    align-self: flex;
+    padding: .5vw 1vw;
+    border-radius: 5px 0px 5px 0px;
+    background-color: #0f8bde;
+    margin: 1vw;
+    border: 1px solid gray;
+    color: white;
+}
+
+.PromptModal {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PromptModal-inner {
+    background-color: #064976;
+    color: white;
+    width: 50vw;
+    height: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 0 10px 0;
+}
+
+.PromptModal-inner button {
+    margin-top: 1vw;
+    padding: .5vw 2vw;
+    background-color: #0fa7de;
+    border: 1px white solid;
+    border-radius: 0 0px 0 0px;
+    color: white;
+}
+
+/* =================USER PROFILE=============== */
+.userProfile {
+    width: 100%;
+    /* background-color: #0f8bde; */
+    /* height: 90%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.userProfile-btnGroup {
+    margin-top: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: -24%;
+}
+
+.userProfile-btnGroup button {
+    background-color: #0fa7de;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    color: white;
+    border-radius: 1px;
+    margin-left: 20px;
+    padding: .5vw 2vw;
+    border: none;
+    top: 10%;
+}
+
+.userProfile table {
+    margin-top: 3vw;
+    width: 80vw;
+}
+
+.ProviderProfile {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProviderProfile table {
+    margin-top: 3vw;
+    width: 80vw;
+}
+
+.ProviderProfile h3 {
+    width: 40vw;
+    background-color: #1992E0;
+    border-radius: 10px;
+    margin-left: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tdProviderAddress {
+    cursor: pointer;
+}
+
+.tdProviderAddress span {
+    visibility: hidden;
+    width: 60px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px; 
+    font-size: 10px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    margin-right: 5vw;
+    z-index: 1;
+}
+
+.tdProviderAddress:hover span {
+    visibility: visible;
+}
+
+.ProviderProfile table button {
+    margin-top: 10px;
+}
+
+/* =================GET USER INFO=============== */
+.getUserInfo {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.getUserInfo-left {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.getUserInfo-left form {
+    width: 30vw;
+    height: 30vw;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+    /* background-color: #7b97aa; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.getUserInfo-left form>* {
+    width: 20vw;
+}
+
+.getUserInfo-left button {
+    margin-top: 10px;
+    background-color: #064976;
+    border: none;
+    padding: .5vw 2vw;
+    color: white;
+}
+
+.getUserInfo-right {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.getUserInfo-right table {
+    /* background-color: rgb(197, 225, 225); */
+    width: 10vw;
+    height: 30vw;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+/* ================= GET CREDENTIAL INFO =============== */
+.getCredentialInfo-right {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.getCredentialInfo-right table {
+    width: 40vw;
+    height: 30vw;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    text-align: center;
+}
+
+.getCredentialInfo-right table th {
+    width: 100%;
+    border: none;
+}
+
+.getCredentialInfo-right table td {
+    border: none;
+    width: 100%;
+}
+
+/* =================PROVIDER PROFILE COMPONENT=============== */
+.ProviderProfile table button {
+    background-color: #064976;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    padding: 5px 20px;
+}
+
+/* =================CREDENTIALS=============== */
+.Credentials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.createCredentialBtn {
+    background-color: #0fa7de;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    color: white;
+    border-radius: 20px;
+    padding: .5vw 2vw;
+    border: none;
+    position: relative;
+    right: -37%;
+    top: 10%;
+}
+
+.Credentials table {
+    margin-top: 5vw;
+    width: 70vw;
+    border: 1px solid rgb(192, 188, 188);
+}
+
+.Credentials table button {
+    align-self: flex;
+    padding: .5vw 1vw;
+    border-radius: 5px 0px 5px 0px;
+    background-color: #0f8bde;
+    margin: 1vw;
+    border: 1px solid gray;
+    color: white;
+}
+
+.IssueCredentialModal-inner {
+    background-color: #064976;
+    width: 70vw;
+    height: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.IssueCredentialModal-inner form {
+    color: white;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70vh;
+}
+
+.IssueCredentialModal-inner button {
+    margin-bottom: 2vw;
+    padding: .5vw 2vw;
+    border: 2px solid white;
+    border-radius: 5px 0 5px 0;
+    color: white;
+    background-color: #1992E0;
+    margin-bottom: 0px;
+    /* margin-top: 10vw; */
+    position: relative;
+    float: left;
+    bottom: 0%;
+}
+
+/* =================ISSUED CREDENTIALS=============== */
+.IssuedCredentials{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.IssuedCredentials table{
+    margin-top: 2vw;
+    border: 2px solid gray;
+    width: 50vw;
+}
+.IssuedCredentials table button{
+    font-size: 15px;
+    background-color: #064976;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: .5vw 1.5vw;
+}
+
+/* =================CREDENTIAL ACCESS=============== */
+.IssuedCredentials table{
+    margin-top: 2vw;
+    border: 2px solid gray;
+    width: 50vw;
+}
+.IssuedCredentials table button{
+    font-size: 15px;
+    background-color: #064976;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: .5vw 1.5vw;
+}
+/* =================ABOUT US=============== */
+.AboutUs{
+    display: flex;
+    align-items: center;
+    text-align: start;
+    justify-content: center;
+    flex-direction: column;
+}
+.AboutUs-Block{
+    background-color: #064976;
+    height: 60vh;
+    margin-top: 5vw;
+    border-radius: 30px;
+    color: white;
+}
+.AboutUs-Block {
+    box-sizing: border-box;
+    padding: 40px 0 0 20px;
+    width: 80%;
+}
+.AboutUs-Block p{
+    line-height: 25px;
+    width: 90%;
+}
+/* ====================DEVELOPERS======================= */
+.Developers{
+    display: flex;
+    width: 100%;
+    height: 70vh;
+}
+.Developers .first{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.Developers .second{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.dev-card {
+}
+.dev-card-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    margin-top: 1vw;
+    width: 30vw;
+    height: 20vw;
+}
+
+.dev-card img{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.dev-card h5{
+    font-weight: bold;
+    color: #797676;
+}
+/* ====================CERTIFICATES======================= */
+.certificate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.certificate .btns {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.certificate .credentialBtn {
+    background-color: #064976;
+    color: white;
+    border: solid white 2px;
+    margin-left: 20px;
+    padding: .5vw 2vw;
+    border-radius: 20px;
+}
+
+.presentButton {
+    border-radius: 5px;
+    background-color: #093162;
+    color: white;
+    border: solid white 2px;
+    padding: .5vw 2vw;
+}
+
+.certificate-table {
+    width: 70vw;
+    border: 2px solid rgb(143, 138, 138);
+    /* border-radius: 20px; */
+    margin-top: 2vw;
+    /* align-items: center; */
+    text-align: center;
+    background-color: #87a4b7;
+}
+
+.certificate-table td,
+.certificate-table th {
+    border: gray 1px solid;
+    box-sizing: border-box;
+
+}
+
+.certificate-table .attr-key-val {
+    width: 18vw;
+    text-align: center;
+    align-content: center;
+}
+
+
+.presentCredentialModal {
+    background-color: #064976;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid black;
+    width: 30vw;
+    height: 90vh;
+    position: absolute;
+    top: 4%;
+    left: 35%;
+}
+
+.presentCredentialModal-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .presentCredentialModal-div input{
+    width: 20vw;
+} */
+.presentCredentialModal-div button {
+    border: 1px solid white;
+    background-color: #1992E0;
+    color: white;
+    padding: .5vw 2vw;
+
+}
+
+
+
+/* =================================== */
