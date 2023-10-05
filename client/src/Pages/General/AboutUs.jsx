@@ -3,20 +3,20 @@ import FooterLayout from '../../Components/FooterLayout';
 import LoggedInMenuLayout from '../../Components/LoggedInMenuLayout';
 
 function AboutUs() {
-    return (
-        <>
-            <LoggedInMenuLayout>
-                <div className='AboutUs'>
-                    <div className='AboutUs-Block'>
-                        <h1>EduCareer:</h1>
-                        <h5>Physical & Online Interactive -</h5>
-                        <h1>Blockchain Training &
-                            DApps Development</h1>
-                            <p>EduCareer is a leading online training provider in Web3 and Blockchain, specializing in DApp development for government and social sectors. Our mission is to establish DAOs for global youth empowerment. We offer comprehensive courses in Ethereum, Hyperledger, and Corda, emphasizing hands-on experience. Our flexible learning environment caters to all skill levels. Join us to be part of a community shaping a decentralized, transparent, and sustainable future.</p>
-                    </div>
+  return (
+    <>
+      <LoggedInMenuLayout>
+        <div className='AboutUs'>
+          <div className='AboutUs-Block'>
+            <h1>EduCareer:</h1>
+            <h5>Physical & Online Interactive -</h5>
+            <h1>Blockchain Training &
+              DApps Development</h1>
+            <p>EduCareer is a leading online training provider in Web3 and Blockchain, specializing in DApp development for government and social sectors. Our mission is to establish DAOs for global youth empowerment. We offer comprehensive courses in Ethereum, Hyperledger, and Corda, emphasizing hands-on experience. Our flexible learning environment caters to all skill levels. Join us to be part of a community shaping a decentralized, transparent, and sustainable future.</p>
+          </div>
 
-                </div>
-                <div className="HomePage" >
+        </div>
+        <div className="HomePage" >
           <div className='HomePage-inner'>
             <div className='HomePage-inner-left'>
               <h2><b>EduCareer</b> Decentralized Identification System</h2>
@@ -71,10 +71,10 @@ function AboutUs() {
             </div>
           </div>
         </div>
-            </LoggedInMenuLayout>
-            <FooterLayout></FooterLayout>
-        </>
-    )
+      </LoggedInMenuLayout>
+      <FooterLayout></FooterLayout>
+    </>
+  )
 }
 
 export default AboutUs

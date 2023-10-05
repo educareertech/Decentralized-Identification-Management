@@ -13,6 +13,7 @@ function Credentials() {
     const [credentials, setCredentials] = useState();
     const [schemaId, setSchemaId] = useState();
     const [subjectDid, setSubjectDid] = useState();
+    const [subjectName, setSubjectName] = useState();
     const [expiryDate, setExpiryDate] = useState();
     const [claimValues, setClaimValues] = useState([]);
     const [attributes, setAttributes] = useState([]);
@@ -70,7 +71,7 @@ function Credentials() {
         const providerId = sessionStorage.getItem('providerId');
         try {
             console.log(date);
-            const tx = await contract.issueCredential(providerId, schemaId, subjectDid, date, claimValues)
+            const tx = await contract.issueCredential(providerId, subjectName, schemaId, subjectDid, date, claimValues)
             setIsLoading(true);
             const receipt = await tx.wait();
             const issuedId = receipt.events[0].args.subjectDid;
@@ -139,12 +140,16 @@ function Credentials() {
                                         <input onChange={(e) => setSubjectDid(e.target.value)} className='form-control' type="text" />
                                     </div>
                                     <div>
+                                        <label htmlFor="" className='form-label'>Subject Name</label>
+                                        <input onChange={(e) => setSubjectName(e.target.value)} className='form-control' type="text" />
+                                    </div>
+                                    <div>
                                         <label htmlFor="" className='form-label'>Expiration Data</label>
                                         <input onChange={(e) => setExpiryDate(e.target.value)} className='form-control' type="date" />
                                     </div>
 
                                 </div>
-                                <div>
+                                <div className='keyValues'>
                                     {attributes &&
                                         attributes?.map((item, index) => (
                                             <div>

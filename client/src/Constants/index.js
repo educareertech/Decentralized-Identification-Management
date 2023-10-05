@@ -1,9 +1,9 @@
-// export const ACCESS_MANAGEMENT_ADDRESS = '0x983591D5Da45d79723b151AF61f64b0C79310233'; // sepolia
-// export const VC_CONTRACT_ADDRESS = '0x69d9b4ADaDC1DaaB3df042D382f304d4425f28BD'; // sepolia
+export const ACCESS_MANAGEMENT_ADDRESS = '0x983591D5Da45d79723b151AF61f64b0C79310233'; // sepolia
+export const VC_CONTRACT_ADDRESS = '0xcA70C50Dd4Eb162201EA35fa7A72363Af467dA1E'; // sepolia
 
 // LocalHost
-export const ACCESS_MANAGEMENT_ADDRESS = '0xfBECbd548B8BdA886BA45cA496C89C9227a51d4F'; // Local Host
-export const VC_CONTRACT_ADDRESS = '0xB40a90fdB0163cA5C82D1959dB7e56B50A0dC016'; // Local Host
+// export const ACCESS_MANAGEMENT_ADDRESS = '0xd0F350b13465B5251bb03E4bbf9Fa1DbC4a378F3'; // Local Host
+// export const VC_CONTRACT_ADDRESS = '0xB40a90fdB0163cA5C82D1959dB7e56B50A0dC016'; // Local Host
 
 export const ACCESS_MANAGEMENT_ABI = [
     {
@@ -416,7 +416,7 @@ export const ACCESS_MANAGEMENT_ABI = [
         "type": "function"
     }
 ]
-export const VC_ABI =   [
+export const VC_ABI =    [
     {
         "inputs": [
             {
@@ -603,7 +603,7 @@ export const VC_ABI =   [
             {
                 "internalType": "uint256",
                 "name": "_schemaId",
-                "type": "uint256"
+                "type": "string"
             },
             {
                 "internalType": "string",
@@ -683,6 +683,11 @@ export const VC_ABI =   [
                 "type": "string"
             },
             {
+                "internalType": "string",
+                "name": "applicant",
+                "type": "string"
+            },
+            {
                 "internalType": "uint256",
                 "name": "schemaId",
                 "type": "uint256"
@@ -695,11 +700,6 @@ export const VC_ABI =   [
             {
                 "internalType": "uint256",
                 "name": "issuanceDate",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "expirationDate",
                 "type": "uint256"
             },
             {
@@ -940,6 +940,11 @@ export const VC_ABI =   [
                 "type": "bytes32"
             },
             {
+                "internalType": "string",
+                "name": "subjectName",
+                "type": "string"
+            },
+            {
                 "internalType": "uint256",
                 "name": "_schemaId",
                 "type": "uint256"
@@ -948,11 +953,6 @@ export const VC_ABI =   [
                 "internalType": "bytes32",
                 "name": "_subjectDid",
                 "type": "bytes32"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_expirationDate",
-                "type": "uint256"
             },
             {
                 "internalType": "string[]",

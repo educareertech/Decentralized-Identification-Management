@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import FooterLayout from '../../Components/FooterLayout';
 import LoggedInMenuLayout from '../../Components/LoggedInMenuLayout';
 import { ContextState } from '../../Context/useContext';
 import { useNavigate } from 'react-router-dom';
 import { BigNumber, utils } from 'ethers';
-import Loader from '../../Components/Loader';
+// import Loader from '../../Components/Loader';
+import QRCodeGenerator from './QRGenerator';
+import CertificateGenerator from './PDFGenerator';
 
 function MyCredentials() {
   const { VC_Contract } = ContextState();
@@ -22,10 +24,12 @@ function MyCredentials() {
   const [selectedCredentialId, setSelectedCredentialId] = useState();
   const [schemaId, setSchemaId] = useState();
   const [providerId, setProviderId] = useState()
+  const [applicantName, setApplicantName] = useState();
   const [credentialName, setCredentialName] = useState();
   const [expiryDate, setExpiryDate] = useState();
-  const [claimValues, setClaimValues] = useState();
-  const [claimAttributes, setClaimAttributes] = useState();
+  const [issuanceDate, setIssuanceDate] = useState();
+  const [claimData, setClaimData] = useState();
+
 
   const [schemaNameArray, setSchemaNameArray] = useState();
 
@@ -38,20 +42,30 @@ function MyCredentials() {
   //   setRevokeModalOpen(false);
   // }
 
-  const handleButtonClick = async (e, item, expiryDate, providerId, schemaId) => {
+
+  const handleButtonClick = async (e, item, expiryDate, issuanceDate, providerId, schemaId, applicant) => {
     setProviderId(providerId);
     const contract = await VC_Contract(true);
+    setApplicantName(applicant);
+    console.log(issuanceDate);
     try {
       setSelectedCredentialId(e);
-      console.log("Runing Handle Click");
-      console.log(e, item, schemaId, expiryDate)
       setSchemaId(schemaId);
       setCredentialName(item);
       setExpiryDate(expiryDate);
+      setIssuanceDate(issuanceDate);
       console.log("E in Desired Funciton", e);
       const [claimValues, schemas] = await contract.getCredential(e);
-      setClaimAttributes(schemas);
-      setClaimValues(claimValues);
+      console.log(claimValues);
+      console.log(schemas);
+
+      // Make a single Object From Keys and Values
+      const mergedObj = schemas.reduce((result, key, index) => {
+        result[key] = claimValues[index];
+        return result;
+      }, {})
+      setClaimData(JSON.stringify(mergedObj));
+      console.log(mergedObj);
     } catch (error) {
       console.log(error);
     }
@@ -66,8 +80,6 @@ function MyCredentials() {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
     };
     const formated = date.toLocaleDateString('en-US', options);
     console.log(formated);
@@ -84,33 +96,33 @@ function MyCredentials() {
     let _issuanceDate = [];
     let _schemaId = [];
     let _providerId = [];
+    let _applicants = [];
     const promises = credentialIds.map(async (item) => {
       console.log("Item in Get Funciton", item);
       const VC = await contract.credentials(item);
-      console.log("VC 2 Lac",VC);
-
-      // const parsedIssuanceDate = await parseDate(VC.issuanceDate)
-      // const parsedIssuanceDate = await parseDate('64f9c9c3')
+      console.log("VC 2 Lac", VC);
 
       if (!VC.isRevoked) {
         // ------------------------
-        console.log("Kitni martaba");
-        console.log(VC.expirationDate);
+        const parsedIssueDate = await parseDate(VC.issuanceDate);
+        console.log(parsedIssueDate);
         const parsedExpiryDate = await parseDate(VC.expirationDate)
         console.log(parsedExpiryDate);
         // ------------------------
 
+        _applicants.push(VC.applicant);
         _providerId.push(VC.providerId);
         const schemaId = VC.schemaId.toNumber();
         _schemaId.push(schemaId);
         const schema = await contract.CredentialSchemas(schemaId);
 
-
+        _issuanceDate.push(parsedIssueDate);
         _expiryDate.push(parsedExpiryDate);
         _schemaArray.push(schema[0]);
       }
-      return { schemas: _schemaArray, credentialIds, _expiryDate, _schemaId, _providerId };
+      return { schemas: _schemaArray, credentialIds, _expiryDate, _issuanceDate, _schemaId, _providerId, _applicants };
     })
+
     const schemaArray = await Promise.all(promises);
     console.log(schemaArray.credentialIds)
 
@@ -172,13 +184,13 @@ function MyCredentials() {
           <div className='btns'>
             {schemaNameArray?.schemas && schemaNameArray.credentialIds &&
               schemaNameArray?.schemas?.map((item, index) => (
-                <button className='credentialBtn' onClick={(e) => handleButtonClick(schemaNameArray.credentialIds[index], item, schemaNameArray._expiryDate[index], schemaNameArray._providerId[index], schemaNameArray._schemaId[index])}>{item}</button>
+                <button className='credentialBtn' onClick={(e) => handleButtonClick(schemaNameArray.credentialIds[index], item, schemaNameArray._expiryDate[index], schemaNameArray._issuanceDate[index], schemaNameArray._providerId[index], schemaNameArray._schemaId[index], schemaNameArray._applicants[index])}>{item}</button>
               ))
             }
           </div>
           {schemaId && expiryDate &&
             <>
-              <table className='table certificate-table '>
+              {/* <table className='table certificate-table '>
                 <thead>
                   <tr>
                     <th>Credential Name</th>
@@ -217,69 +229,73 @@ function MyCredentials() {
               </table>
               <div className='btns'>
                 <button className='presentButton' onClick={(e) => navigate(`/CredentialAccess/${schemaId}`)}>Check Access</button>
-                {/* <button className='presentButton' onClick={(e) => setRevokeModalOpen(true)}>Revoke Sharing</button> */}
+                <button className='presentButton' onClick={(e) => setRevokeModalOpen(true)}>Revoke Sharing</button>
                 <button className='presentButton' onClick={(e) => setIsOpen(true)}>Present</button>
-              </div>
+              </div> */}
             </>
           }
         </div>
 
 
 
-        <Modal className="presentCredentialModal d-flex flex-column align-items-center justify-content-center  rounded" isOpen={isOpen} onRequestClose={closeModal}>
+        {/* <Modal className="presentCredentialModal d-flex flex-column align-items-center justify-content-center  rounded" isOpen={isOpen} onRequestClose={closeModal}>
           <div className='w-100 presentCredentialModal-div'>
             {
-            isLoading ? 
-            <Loader color={"white"}></Loader> 
-            :
-            <form className='form' action="">
-              <div className="mb-3">
-                <label htmlFor="subjectDID" className='form-label'>Subject DID</label>
-                <input onChange={(e) => setAllowedDid(e.target.value)} className='form-control' type="text" id="subjectDID" />
-              </div>
-
-              {
-                claimAttributes?.map((item, index) => (
-                  <div className="form-check" key={item}>
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value={item}
-                      id={item}
-                      checked={selectedAttributes.includes(item)}
-                      onChange={() => handleCheckboxChange(item)}
-                    />
-                    <label className="form-check-label" htmlFor={item}>{item}</label>
+              isLoading ?
+                <Loader color={"white"}></Loader>
+                :
+                <form className='form' action="">
+                  <div className="mb-3">
+                    <label htmlFor="subjectDID" className='form-label'>Subject DID</label>
+                    <input onChange={(e) => setAllowedDid(e.target.value)} className='form-control' type="text" id="subjectDID" />
                   </div>
-                ))
 
-              }
-              <div className='mt-4'>
-                <button onClick={presentCredential} type="submit" className="btn btn-primary">Submit</button>
-              </div>
-            </form>
-              
+                  {
+                    claimAttributes?.map((item, index) => (
+                      <div className="form-check" key={item}>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value={item}
+                          id={item}
+                          checked={selectedAttributes.includes(item)}
+                          onChange={() => handleCheckboxChange(item)}
+                        />
+                        <label className="form-check-label" htmlFor={item}>{item}</label>
+                      </div>
+                    ))
+
+                  }
+                  <div className='mt-4'>
+                    <button onClick={presentCredential} type="submit" className="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+
             }
           </div>
-        </Modal>
-
-        {/* <Modal className="presentCredentialModal d-flex flex-column align-items-center justify-content-center  rounded" isOpen={revokeModalOpen} onRequestClose={closeRevokeModal}>
-            <div className='w-100 presentCredentialModal-div'>
-              <form className='form' action="">
-                <div className="mb-3">
-                  <label htmlFor="subjectDID" className='form-label'>Subject DID</label>
-                  <input onChange={(e) => setRevokeDid(e.target.value)} className='form-control' type="text" id="subjectDID" />
-                </div>
+        </Modal> */}
 
 
-                <div className='mt-4'>
-                  <button onClick={revokeClaimSharing} type="submit" className="btn btn-primary">Submit</button>
-                </div>
-              </form>
+        {schemaId && expiryDate &&
+          <>
+            {/* <div className="certificateTemp">
+              <h1>Certificate of Achievement</h1>
+              <p>This is to certify that</p>
+              <h2>{applicantName}</h2>
+              <p>has successfully completed the certificate of</p>
+              <h3>{credentialName}</h3>
+              <div className="signature">
+              <img src="signature.png" alt="Signature" />
             </div>
-          </Modal> */}
-
-
+              <div className='QRDiv'>
+                <p className="date">{issuanceDate}</p>
+                <QRCodeGenerator data={claimData} />
+              </div>
+            </div> */}
+            <CertificateGenerator data={{applicantName, credentialName, issuanceDate, claimData}}></CertificateGenerator>
+          </>
+          // <CertificateDownload data={{applicantName, credentialName, issuanceDate, claimData}} />
+        }
       </LoggedInMenuLayout>
       <FooterLayout />
     </>

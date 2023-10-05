@@ -5,10 +5,10 @@ function FooterLayout() {
   return (
     <div className='footerLayout'>
         <div className="icons">
-            <LinkRounded />
-            <FacebookRounded />
-            <Twitter />
-            <YouTube  />
+            <a target='_blank' href="https://www.linkedin.com/company/educareertech/"><LinkRounded /></a>
+            <a target='_blank' href="https://www.facebook.com/EduCareertech"><FacebookRounded /></a> 
+            <a target='_blank' href=""><Twitter /></a> 
+            <a target='_blank' href="https://www.youtube.com/@EduCareertech."><YouTube  /></a> 
         </div>
         <div className='footerMenu'>
             <li>Contact Us |</li>

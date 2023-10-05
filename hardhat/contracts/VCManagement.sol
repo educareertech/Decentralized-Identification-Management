@@ -10,18 +10,19 @@ contract Verifiable_Credential {
 
     struct CredentialSchema {
         string schemaName;
-        uint256 schemaID;
+        string schemaID;
         string[] attributes;
     }
 
     struct VerifiableCredential {
         string schemaName;
-        uint256 schemaId;
+        string applicant;
+        string schemaId;
         bytes32 providerId;
         uint256 issuanceDate;
-        uint256 expirationDate;
         mapping(string => string) claimValues;
         bool isRevoked;
+        bool issued;
     }
     struct Provider {
         bytes32 providerId;
@@ -30,31 +31,31 @@ contract Verifiable_Credential {
         bool registered;
     }
 
-    mapping(uint256 => CredentialSchema) public CredentialSchemas;
-    mapping(bytes32 => mapping(uint256 => bool)) public providerToSchema;
+    mapping(string => CredentialSchema) public CredentialSchemas;
+    mapping(bytes32 => mapping(string => bool)) public providerToSchema;
     mapping(bytes32 => VerifiableCredential) public credentials;
     mapping(bytes32 => bytes32[]) public issuerCredentials;
     mapping(bytes32 => bytes32[]) public userVCs;
-    mapping(uint256 => mapping(bytes32 => mapping(bytes32 => string[]))) allowedClaims;
+    mapping(string => mapping(bytes32 => mapping(bytes32 => string[]))) allowedClaims;
     mapping(bytes32 => Provider[]) public providerIdToProvider;
-    mapping(bytes32 => mapping(uint256 => mapping(bytes32 => bool))) allowedClaimsBool;
-    mapping(bytes32 => mapping(uint256 => bytes32[])) allowedClaimsArray;
-    mapping(bytes32 => mapping(uint256 => bytes32[])) credentialIssuerToDid;
+    mapping(bytes32 => mapping(string => mapping(bytes32 => bool))) allowedClaimsBool;
+    mapping(bytes32 => mapping(string => bytes32[])) allowedClaimsArray;
+    mapping(bytes32 => mapping(string => bytes32[])) credentialIssuerToDid;
 
-    mapping(bytes32 => uint256[]) public schemaCounter;
+    mapping(bytes32 => string[]) public schemaCounter;
     mapping(bytes32 => bytes32[]) public providerIds;
 
-    Identity public IdentityContract;
 
-    event CredentialSchemaCreated(uint256 schemaID, string indexed schemaName);
+    event CredentialSchemaCreated(string indexed schemaID, string indexed schemaName);
     event CredentialIssued(bytes32 indexed credentialId,bytes32 indexed subjectDid);
     event CredentialRevoked(bytes32 indexed credentialId);
-    event FieldsAllowed(uint256 indexed schemaId, bytes32 indexed subjectDid);
+    event FieldsAllowed(string indexed schemaId, bytes32 indexed subjectDid);
     event allowedFieldsRevoked(bytes32 indexed _subjectDid);
     event ProviderCreated(bytes32 indexed userDid, bytes32 indexed providerId);
     event IdentityUpdated(address indexed newAddress);
     event OwnerUpdated(address indexed newAddress);
 
+    Identity public IdentityContract;
     address public owner;
 
     constructor(address _didContractAddress) {
@@ -72,7 +73,7 @@ contract Verifiable_Credential {
         _;
     }
 
-    function addCredentialSchema(bytes32 providerId,uint256 _schemaId,string memory _schemaName,string[] memory _attributes) public isDidRegistered(IdentityContract.getUserDid(msg.sender)) {
+    function addCredentialSchema(bytes32 providerId, string memory _schemaId,string memory _schemaName,string[] memory _attributes) public isDidRegistered(IdentityContract.getUserDid(msg.sender)) {
         require(!providerToSchema[providerId][_schemaId],"Schema Already Registered");
         CredentialSchemas[_schemaId] = CredentialSchema(
             _schemaName,
@@ -102,7 +103,7 @@ contract Verifiable_Credential {
         emit ProviderCreated(userDid, providerId);
     }
 
-    function getIssuedCredentialsIds(bytes32 _providerId, uint256 schemaId) public view returns (bytes32[] memory) {
+    function getIssuedCredentialsIds(bytes32 _providerId, string calldata schemaId) public view returns (bytes32[] memory) {
         return credentialIssuerToDid[_providerId][schemaId];
     }
 
@@ -124,23 +125,24 @@ contract Verifiable_Credential {
         return schema;
     }
 
-    function generateVCID(bytes32 providerId, uint256 _schemaId) internal pure returns (bytes32) {
+    function generateVCID(bytes32 providerId, string calldata _schemaId) internal pure returns (bytes32) {
         return bytes32(keccak256(abi.encodePacked(_schemaId, providerId)));
     }
 
-    function issueCredential(bytes32 providerId, uint256 _schemaId, bytes32 _subjectDid, uint256 _expirationDate, string[] memory _claimValues ) public isDidRegistered(_subjectDid) {
+    function issueCredential(bytes32 providerId, string calldata subjectName, string calldata _schemaId, bytes32 _subjectDid, string[] memory _claimValues) public isDidRegistered(_subjectDid) {
         bytes32 credId = generateVCID(_subjectDid, _schemaId);
         require(_claimValues.length == CredentialSchemas[_schemaId].attributes.length,"Invalid claim values");
         userVCs[_subjectDid].push(credId);
 
         VerifiableCredential storage newCredential = credentials[credId];
         require(!newCredential.isRevoked, "Credential Already Issued and revoked");
-        require(newCredential.schemaId == 0, "Credential Already Issued");
+        require(!newCredential.issued, "Credential Already Issued");
+        newCredential.applicant = subjectName; 
         newCredential.issuanceDate = block.timestamp;
-        newCredential.expirationDate = _expirationDate;
         newCredential.schemaId = CredentialSchemas[_schemaId].schemaID;
         newCredential.providerId = providerId;
         newCredential.isRevoked = false;
+        newCredential.issued = true;
         newCredential.schemaName = CredentialSchemas[_schemaId].schemaName;
 
         for (uint256 i = 0; i < _claimValues.length; i++) {
@@ -155,7 +157,7 @@ contract Verifiable_Credential {
         emit CredentialIssued(providerId, credId);
     }
 
-    function revokeCredentialByIndex(bytes32 subjectDid, uint256 schemaId, uint256 _index ) public {
+    function revokeCredentialByIndex(bytes32 subjectDid, string calldata schemaId, uint256 _index ) public {
         bytes32 credId = generateVCID(subjectDid, schemaId);
         rovokeCredentialById(credId);
 
@@ -189,8 +191,7 @@ contract Verifiable_Credential {
     function getCredential(bytes32 _credentialId) public view returns (string[] memory, string[] memory){
         VerifiableCredential storage credential = credentials[_credentialId];
         require(!credential.isRevoked, "Credential is revoked");
-        require(credential.expirationDate > block.timestamp, "This credential is out-dated");
-        uint256 _schemaId = credential.schemaId;
+        string memory _schemaId = credential.schemaId;
         string[] memory claimValues = new string[](
             CredentialSchemas[_schemaId].attributes.length
         );
@@ -202,7 +203,7 @@ contract Verifiable_Credential {
         return (claimValues, CredentialSchemas[_schemaId].attributes);
     }
 
-    function allowFields( uint256 schemaId, bytes32 _subjectDid, string[] memory claimValues) public isDidRegistered(_subjectDid) {
+    function allowFields( string calldata schemaId, bytes32 _subjectDid, string[] memory claimValues) public isDidRegistered(_subjectDid) {
         bytes32 userDid = IdentityContract.getUserDid(msg.sender);
         require(credentials[userDid].isRevoked != true,"Credential is revoked or doesn't exist");
         require(allowedClaimsBool[userDid][schemaId][_subjectDid] == false,"Revoke previous Allowed Claims");
@@ -213,7 +214,7 @@ contract Verifiable_Credential {
         emit FieldsAllowed(schemaId, _subjectDid);
     }
 
-    function revokeAllowedFieldsByIndex(bytes32 _subjectDid,uint256 schemaId,uint256 _index) public {
+    function revokeAllowedFieldsByIndex(bytes32 _subjectDid,string calldata schemaId,uint256 _index) public {
         revokeAllowedFields(_subjectDid, schemaId);
 
         bytes32[] storage claimsArray = allowedClaimsArray[_subjectDid][schemaId];
@@ -227,7 +228,7 @@ contract Verifiable_Credential {
         claimsArray.pop();
     }
 
-    function revokeAllowedFields(bytes32 _subjectDid, uint256 schemaId) public {
+    function revokeAllowedFields(bytes32 _subjectDid, string calldata schemaId) public {
         bytes32 ownerDid = IdentityContract.getUserDid(msg.sender);
         require(
             allowedClaimsBool[ownerDid][schemaId][_subjectDid],
@@ -237,11 +238,11 @@ contract Verifiable_Credential {
         emit allowedFieldsRevoked(_subjectDid);
     }
 
-    function getAllowedClaimsDids(bytes32 ownerDid, uint256 schemaId) public view returns (bytes32[] memory) {
+    function getAllowedClaimsDids(bytes32 ownerDid, string calldata schemaId) public view returns (bytes32[] memory) {
         return allowedClaimsArray[ownerDid][schemaId];
     }
 
-    function getAllowedFields(uint256 schemaId, bytes32 _ownerDid) public view returns (string[] memory, string[] memory, bytes32) {
+    function getAllowedFields(string calldata schemaId, bytes32 _ownerDid) public view returns (string[] memory, string[] memory, bytes32) {
         require(allowedClaimsBool[_ownerDid][schemaId][IdentityContract.getUserDid(msg.sender)],"Claims are not allowed");
         bytes32 _credId = generateVCID(_ownerDid, schemaId);
         VerifiableCredential storage credential = credentials[_credId];

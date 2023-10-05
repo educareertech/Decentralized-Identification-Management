@@ -610,8 +610,9 @@
 .IssueCredentialModal-inner {
     background-color: #064976;
     width: 70vw;
-    height: 40vw;
+    min-height: 40vw;
     display: flex;
+    
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -638,6 +639,12 @@
     position: relative;
     float: left;
     bottom: 0%;
+}
+.keyValues{
+    height: 30vw;
+    overflow-y: scroll;
+    padding-right: 4vw;
+    box-sizing: border-box;
 }
 
 /* =================ISSUED CREDENTIALS=============== */
@@ -827,6 +834,64 @@
 
 }
 
+/* ==============CERTIFICATE TEMPELATE============= */
 
+.certificateTemp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+    /* background-color: #a6cce6; */
+}
 
+/* ======================= */
+
+.certificateTemp h1 {
+    color: #333;
+    /* font-family: cursive; */
+}
+.certificateTemp h2 {
+}
+.certificateTemp p {
+    color: #555;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.signature {
+    margin-top: 40px;
+}
+
+.signature img {
+    width: 200px;
+    height: auto;
+}
+
+.date {
+    margin-top: 20px;
+    font-size: 16px;
+}
+.QRDiv{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-right: 4vw; */
+}
+.downloadPDFBtnDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.downloadPDFBtnDiv button {
+    background-color: #0f8bde;
+    border: none;
+    padding: .5vw 2vw;
+}
 /* =================================== */

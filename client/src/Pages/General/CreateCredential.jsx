@@ -32,8 +32,9 @@ function CreateCredential() {
         e.preventDefault();
         const contract = await VC_Contract(true);
         const providerId = sessionStorage.getItem('providerId');
+        console.log(typeof(schemaId))
         try {
-            const tx = await contract.addCredentialSchema(providerId, schemaId.toString(16), credentialName, credentialAttributes);
+            const tx = await contract.addCredentialSchema(providerId, schemaId, credentialName, credentialAttributes);
             setIsLoading(true);
             const receipt = await tx.wait();
             setIsLoading(false);
@@ -42,7 +43,7 @@ function CreateCredential() {
             setSchemaId('');
             setIsOpen(true);
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
         }
     }
 
@@ -65,7 +66,7 @@ function CreateCredential() {
                             </div>
                             <div>
                                 <label htmlFor="" className='form-label'>Credential Attributes</label>
-                                <input onChange={handleAttributes} className='form-control' />
+                                <textarea onChange={handleAttributes} className='form-control' />
                             </div>
                             <div className='mt-4'>
                                 <button type="text" onClick={createNewCredential}>Submit</button>
